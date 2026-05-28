@@ -40,3 +40,4 @@ calculator-app/
 ## Author
 
 Developed for internship task submission.
+Calculator project updated
