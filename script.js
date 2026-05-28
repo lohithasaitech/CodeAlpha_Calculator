@@ -1,75 +1,49 @@
-let display = document.getElementById("display");
+const display = document.getElementById("display");
 
-function appendValue(value){
-
-  display.value += value;
-
+function appendValue(value) {
+    display.value += value;
 }
 
-function clearDisplay(){
-
-  display.value = "";
-
+function clearDisplay() {
+    display.value = "";
 }
 
-function deleteValue(){
-
-  display.value = display.value.slice(0,-1);
-
+function deleteLast() {
+    display.value = display.value.slice(0, -1);
 }
 
-function calculateResult(){
-
-  try{
-
-    display.value = eval(display.value);
-
-  }
-
-  catch(error){
-
-    display.value = "Invalid";
-
-  }
-
+function calculate() {
+    try {
+        display.value = eval(display.value);
+    } catch {
+        display.value = "Error";
+    }
 }
 
-// Keyboard Support
+/* Keyboard Support */
 
-document.addEventListener("keydown", function(event){
+document.addEventListener("keydown", function (event) {
 
-  let key = event.key;
+    const key = event.key;
 
-  if(
-    (key >= "0" && key <= "9") ||
-    key === "+" ||
-    key === "-" ||
-    key === "*" ||
-    key === "/" ||
-    key === "." ||
-    key === "%"
-  ){
+    // Numbers and operators
+    if (!isNaN(key) || ["+", "-", "*", "/", ".", "%"].includes(key)) {
+        display.value += key;
+    }
 
-    appendValue(key);
+    // Enter key for result
+    else if (key === "Enter") {
+        event.preventDefault();
+        calculate();
+    }
 
-  }
+    // Backspace key
+    else if (key === "Backspace") {
+        deleteLast();
+    }
 
-  else if(key === "Enter"){
-
-    calculateResult();
-
-  }
-
-  else if(key === "Backspace"){
-
-    deleteValue();
-
-  }
-
-  else if(key === "Escape"){
-
-    clearDisplay();
-
-  }
-
+    // Escape key to clear
+    else if (key === "Escape") {
+        clearDisplay();
+    }
 });
