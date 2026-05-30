@@ -27,7 +27,7 @@ document.addEventListener("keydown", function (event) {
     const key = event.key;
 
     // Numbers and operators
-    if (!isNaN(key) || ["+", "-", "*", "/", ".", "%"].includes(key)) {
+    if (!isNaN(key) || ["+", "-", "×", "/", ".", "%"].includes(key)) {
         display.value += key;
     }
 
