@@ -14,7 +14,11 @@ function deleteLast() {
 
 function calculate() {
     try {
-        display.value = eval(display.value);
+        let expression = display.value
+            .replace(/×/g, "*")
+            .replace(/÷/g, "/");
+
+        display.value = eval(expression);
     } catch {
         display.value = "Error";
     }
@@ -27,7 +31,7 @@ document.addEventListener("keydown", function (event) {
     const key = event.key;
 
     // Numbers and operators
-    if (!isNaN(key) || ["+", "-", "×", "÷", ".", "%"].includes(key)) {
+    if (!isNaN(key) || ["+", "-", "*", "/", ".", "%"].includes(key)) {
         display.value += key;
     }
 
